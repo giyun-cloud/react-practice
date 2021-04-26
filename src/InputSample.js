@@ -1,21 +1,34 @@
 import React from 'react'
 
 function InputSample() {
-  const [text, setText] = React.useState('')
+  const [texts, setTexts] = React.useState({
+    name: '',
+    nickname: '',
+  })
+  const {name, nickname} = texts
+  const refInputName = React.useRef()
   const onClick = () => {
-    setText('')
+    setTexts({
+      name: '',
+      nickname: '',
+    })
+    refInputName.current.focus()
   }
   const onChange = (e) => {
-    setText(e.target.value)
+    setTexts({
+      ...texts,
+      [e.target.name]: e.target.value,
+    })
   }
 
   return (
     <>
-    <input onChange={onChange} value={text} />
+    <input name="name" onChange={onChange} value={name} placeholder="이름" ref={refInputName} />
+    <input name="nickname" onChange={onChange} value={nickname} placeholder='별명' />
     <button onClick={onClick}>초기화</button>
     <div>
       <b>값 :</b>
-      {text}
+      {name} ({nickname})
     </div>
 
     </>
