@@ -1,28 +1,32 @@
 import React from 'react'
 
+function reducer(state, action){
+  switch(action.type) {
+    case 'INCREMENT':
+      return state + 1
+    case 'DECREMENT':
+      return state - 1
+    default:
+      return state
+  }
+}
+
 function Counter() {
-  const [number, setNumber] = React.useState(0)
+  const [number, dispatch] = React.useReducer(reducer, 0)
   // console.log(React.useState())
 
-  const onPlus = () => {
-    setNumber(n => {
-      if(n < 10) return n+1
-      else return '완성'
-    })
+  const onIncrease = () => {
+    dispatch({type : 'INCREMENT'})
   }
-  const onMinus = () => {
-    setNumber(n => {
-      if(n === '완성') return 10
-      else if (n < - 9) return -10
-      else return n -1
-    })
+  const onDecrease = () => {
+    dispatch({type : 'DECREMENT'})
   }
 
   return (
     <>
       <div style={{fontSize: 30}}>{number}</div>
-      <button onClick={onPlus}>+1</button>
-      <button onClick={onMinus}>-1</button>
+      <button onClick={onIncrease}>+1</button>
+      <button onClick={onDecrease}>-1</button>
     </>
   )
 

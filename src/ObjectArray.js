@@ -1,7 +1,7 @@
-import userEvent from '@testing-library/user-event'
 import React from 'react'
 
-function Array({array, onRemove, onToggle}) {
+
+const Array = React.memo(function Array({array, onRemove, onToggle}) {
   return (
     <>
       <div>
@@ -15,7 +15,7 @@ function Array({array, onRemove, onToggle}) {
       </div>
     </>
   )
-}
+})
 
 function ObjectArray({arrays, onRemove, onToggle}) {
   return (
@@ -27,4 +27,4 @@ function ObjectArray({arrays, onRemove, onToggle}) {
   )
 }
 
-export default ObjectArray
+export default React.memo(ObjectArray)
